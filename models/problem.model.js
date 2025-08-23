@@ -35,9 +35,6 @@ export default (sequelize, DataTypes) => {
         correct_input_value: {
             type: DataTypes.STRING
         },
-        numeric_tolerance: {
-            type: DataTypes.DECIMAL
-        },
         created_by: {
             type: DataTypes.STRING
         },
