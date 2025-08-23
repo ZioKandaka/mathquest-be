@@ -28,7 +28,7 @@ export default async function errorHandler(err, req, res, next) {
     switch (err?.name) {
         case 'NotFound':
             status = 404;
-            message = 'Resource not found';
+            message = err.message || 'Resource not found';
             break;
 
         case 'SequelizeValidationError':
@@ -41,6 +41,11 @@ export default async function errorHandler(err, req, res, next) {
             message = firstSequelizeMessage(err);
             break;
 
+        case 'SequelizeDatabaseError':
+            status = 400;
+            message = firstSequelizeMessage(err);
+            break;
+
         case 'AggregateError':
             status = 400;
             message = firstSequelizeMessage(err);
@@ -48,7 +53,22 @@ export default async function errorHandler(err, req, res, next) {
 
         case 'MissingParameter':
             status = 400;
-            message = 'Required parameter are not complete';
+            message = err.message || 'Required parameter are not complete';
+            break;
+
+        case 'InvalidParameterType':
+            status = 422;
+            message = err.message || 'Invalid parameter type';
+            break;
+
+        case 'ValidationError':
+            status = 400;
+            message = err.message || 'One or more field in the payload is missing';
+            break;
+
+        case 'AttemptMismatch':
+            status = 409;
+            message = 'attempt_id already used with different answers or lesson_id';
             break;
 
         case 'InvalidCredential':

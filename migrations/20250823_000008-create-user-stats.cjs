@@ -6,6 +6,7 @@ module.exports = {
             user_stat_id: {
                 type: Sequelize.BIGINT,
                 primaryKey: true,
+                autoIncrement: true,
             },
             user_id: {
                 type: Sequelize.BIGINT,

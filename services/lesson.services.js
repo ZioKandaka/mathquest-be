@@ -22,11 +22,9 @@ export async function queryLessonWithProblems(lesson_id) {
             model: db.Problem,
             attributes: ['problem_id', 'type', 'prompt'],
             required: false,
-            order: ["position"],
             include: [{
                 model: db.ProblemOption,
                 attributes: ['problem_option_id', 'body'],
-                order: ["position"],
                 required: false,
             }],
         }],
@@ -35,5 +33,32 @@ export async function queryLessonWithProblems(lesson_id) {
             [db.Problem, 'position', 'ASC'],
             [db.Problem, db.ProblemOption, 'position', 'ASC'],
         ],
+    });
+}
+
+export async function queryLessonById(lesson_id) {
+    return db.Lesson.findOne({ lesson_id })
+}
+
+export async function queryLessonWithCorrectAnswers(lesson_id) {
+    return await db.Lesson.findOne({
+        attributes: ['lesson_id', 'title'],
+        where: { lesson_id, is_published: true },
+        include: [{
+            model: db.Problem,
+            attributes: [
+                'problem_id',
+                'type',
+                'position',
+                'xp_value',
+                'correct_input_value'
+            ],
+            include: [{
+                model: db.ProblemOption,
+                attributes: ['problem_option_id', 'is_correct'],
+                required: false,
+            }],
+        }],
+        order: [[db.Problem, 'position', 'ASC']],
     });
 }
