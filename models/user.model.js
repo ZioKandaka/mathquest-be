@@ -12,6 +12,10 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING(255),
             unique: true
         },
+        password: {
+            type: DataTypes.STRING(),
+            allowNull: false
+        },
         created_by: {
             type: DataTypes.STRING
         },
