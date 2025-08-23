@@ -1,3 +1,4 @@
+// migrations/20250823_000003-create-problems.cjs
 'use strict';
 
 module.exports = {
@@ -34,11 +35,6 @@ module.exports = {
             explanation: {
                 type: Sequelize.TEXT,
             },
-            // exactly one of these is used depending on type
-            correct_option_id: {
-                type: Sequelize.BIGINT,
-                allowNull: true,
-            },
             correct_input_value: {
                 type: Sequelize.TEXT,
                 allowNull: true,
@@ -49,51 +45,40 @@ module.exports = {
                 allowNull: false,
                 defaultValue: Sequelize.fn('NOW'),
             },
-            created_by: {
-                type: Sequelize.BIGINT,
-            },
+            created_by: { type: Sequelize.STRING },
             updated_at: {
                 type: Sequelize.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.fn('NOW'),
             },
-            updated_by: {
-                type: Sequelize.BIGINT,
-            },
-            deleted_at: {
-                type: Sequelize.DATE,
-            },
-            deleted_by: {
-                type: Sequelize.BIGINT,
-            },
+            updated_by: { type: Sequelize.STRING },
+            deleted_at: { type: Sequelize.DATE },
+            deleted_by: { type: Sequelize.STRING },
         });
 
-        await queryInterface.addConstraint('problems', {
-            fields: ['lesson_id', 'position'],
-            type: 'unique',
-            name: 'problems_lesson_position_uk',
-            where: { deleted_at: null }
-        });
-        await queryInterface.addIndex('problems', ['lesson_id', 'position'], {
-            name: 'problems_lesson_id_position_idx',
-            where: { deleted_at: null }
-        });
+        await queryInterface.addIndex(
+            'problems',
+            ['lesson_id', 'position'],
+            {
+                name: 'problems_lesson_position_active_uk',
+                unique: true,
+                where: { deleted_at: null },
+            }
+        );
 
-
-        // CHECK: enforce answer mode consistency
         await queryInterface.sequelize.query(`
-            ALTER TABLE problems
-            ADD CONSTRAINT problems_answer_mode_ck
-            CHECK (
-                (type = 'multiple_choice' AND correct_option_id IS NOT NULL AND correct_input_value IS NULL)
-                OR
-                (type = 'input' AND correct_input_value IS NOT NULL AND correct_option_id IS NULL)
-            );
-        `);
+      ALTER TABLE problems
+      ADD CONSTRAINT problems_answer_mode_ck
+      CHECK (
+        (type = 'multiple_choice' AND correct_input_value IS NULL)
+        OR
+        (type = 'input' AND correct_input_value IS NOT NULL)
+      );
+    `);
     },
-    async down(queryInterface, Sequelize) {
+
+    async down(queryInterface) {
         await queryInterface.sequelize.query('ALTER TABLE problems DROP CONSTRAINT IF EXISTS problems_answer_mode_ck;');
-        await queryInterface.removeConstraint('problems', 'problems_lesson_position_uk');
         await queryInterface.dropTable('problems');
         await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_problems_type";');
     },

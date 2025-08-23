@@ -40,5 +40,10 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
     }, { tableName: 'user_stats' });
+
+    UserStats.associate = (models) => {
+        models.UserStats.belongsTo(models.User, { foreignKey: 'user_id' });
+    };
+
     return UserStats;
 };

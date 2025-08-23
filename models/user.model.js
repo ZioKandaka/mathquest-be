@@ -26,5 +26,13 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
     }, { tableName: 'users' });
+
+    User.associate = (models) => {
+        models.User.hasMany(models.Submission, { foreignKey: 'user_id' });
+        models.User.hasMany(models.UserProgress, { foreignKey: 'user_id' });
+        models.User.hasMany(models.UserStats, { foreignKey: 'user_id' });
+        models.User.hasMany(models.XpLedger, { foreignKey: 'user_id' });
+    };
+
     return User;
 };

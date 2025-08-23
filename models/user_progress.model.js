@@ -45,5 +45,11 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
     }, { tableName: 'user_progress' });
+
+    UserProgress.associate = (models) => {
+        models.UserProgress.belongsTo(models.User, { foreignKey: 'user_id' });
+        models.UserProgress.belongsTo(models.Lesson, { foreignKey: 'lesson_id' });
+    };
+
     return UserProgress;
 };

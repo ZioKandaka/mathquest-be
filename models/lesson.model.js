@@ -36,6 +36,8 @@ export default (sequelize, DataTypes) => {
 
     Lesson.associate = (models) => {
         models.Lesson.hasMany(models.Problem, { foreignKey: 'lesson_id' });
+        models.Lesson.hasMany(models.Submission, { foreignKey: 'lesson_id' });
+        models.Lesson.hasMany(models.UserProgress, { foreignKey: 'lesson_id' });
     };
 
 

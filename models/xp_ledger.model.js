@@ -31,5 +31,10 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
     }, { tableName: 'xp_ledger' });
+
+    XpLedger.associate = (models) => {
+        models.XpLedger.belongsTo(models.User, { foreignKey: 'user_id' });
+    };
+
     return XpLedger;
 };

@@ -38,5 +38,11 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
     }, { tableName: 'submission_answers' });
+
+    SubmissionAnswer.associate = (models) => {
+        models.SubmissionAnswer.belongsTo(models.Submission, { foreignKey: 'submission_id' });
+        models.SubmissionAnswer.belongsTo(models.Problem, { foreignKey: 'problem_id' });
+    };
+
     return SubmissionAnswer;
 };

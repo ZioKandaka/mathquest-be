@@ -39,7 +39,7 @@ module.exports = {
                 defaultValue: Sequelize.fn('NOW'),
             },
             created_by: {
-                type: Sequelize.BIGINT,
+                type: Sequelize.STRING,
             },
             updated_at: {
                 type: Sequelize.DATE,
@@ -47,13 +47,13 @@ module.exports = {
                 defaultValue: Sequelize.fn('NOW'),
             },
             updated_by: {
-                type: Sequelize.BIGINT,
+                type: Sequelize.STRING,
             },
             deleted_at: {
                 type: Sequelize.DATE,
             },
             deleted_by: {
-                type: Sequelize.BIGINT,
+                type: Sequelize.STRING,
             },
         });
 
