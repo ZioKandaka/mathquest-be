@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import { getProfile } from '../controllers/profile.controller.js';
 
 const router = Router();
 
-router.get('/', (_req, res) => {
-  res.status(501).json({ todo: 'GET /api/profile' });
-});
+router.get('/', getProfile);
 
 export default router;

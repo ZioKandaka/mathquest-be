@@ -1,6 +1,6 @@
 import db from '../models/index.js';
 
-export async function getLessonsWithProgress(user_id) {
+export async function queryLessonsWithProgress(user_id) {
     return db.Lesson.findAll({
         attributes: ['lesson_id', 'title', 'description'],
         where: { is_published: true },
@@ -14,7 +14,7 @@ export async function getLessonsWithProgress(user_id) {
     });
 }
 
-export async function getLessonWithProblems(lesson_id) {
+export async function queryLessonWithProblems(lesson_id) {
     return db.Lesson.findOne({
         where: { lesson_id: lesson_id, is_published: true },
         attributes: ['lesson_id', 'title', 'description'],
