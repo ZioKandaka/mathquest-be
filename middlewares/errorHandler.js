@@ -21,11 +21,12 @@ function firstSequelizeMessage(err) {
 }
 
 export default async function errorHandler(err, req, res, next) {
+    console.log(err);
     let status = 500;
     let message = 'Internal server error';
 
     switch (err?.name) {
-        case 'notFound':
+        case 'NotFound':
             status = 404;
             message = 'Resource not found';
             break;
@@ -43,6 +44,11 @@ export default async function errorHandler(err, req, res, next) {
         case 'AggregateError':
             status = 400;
             message = firstSequelizeMessage(err);
+            break;
+
+        case 'MissingParameter':
+            status = 400;
+            message = 'Required parameter are not complete';
             break;
 
         case 'InvalidCredential':
