@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import apiRouter from './routes/api.js';
 import errorHandler from './middlewares/errorHandler.js';
+import { mountDocs } from './helpers/swagger.helper.js';
 
 const app = express();
 
@@ -11,12 +12,14 @@ const app = express();
 app.use(helmet());
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN;
 app.use(cors({ origin: [FRONTEND_ORIGIN] }));
-
-// Parsing
 app.use(express.json({ limit: '1000kb' }));
-app.get('/health', (_req, res) => res.status(200).json({ ok: true }));
+
+if (process.env.ENABLE_DOCS !== 'false') {
+  mountDocs(app);            
+}
 
 // API
+app.get('/health', (_req, res) => res.status(200).json({ ok: true }));
 app.use('/api', apiRouter);
 
 // 404
