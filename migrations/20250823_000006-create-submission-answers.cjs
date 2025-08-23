@@ -83,7 +83,7 @@ module.exports = {
     
     async down(queryInterface) {
         await queryInterface.sequelize.query('ALTER TABLE submission_answers DROP CONSTRAINT IF EXISTS submission_answers_shape_ck;');
-        await queryInterface.removeConstraint('submission_answers', 'submission_answers_submission_problem_uk');
+        await queryInterface.removeConstraint('submission_answers', 'submission_answers_submission_id_problem_id_uk');
         await queryInterface.dropTable('submission_answers');
     },
 };
