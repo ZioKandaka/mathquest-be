@@ -1,8 +1,16 @@
 export default (sequelize, DataTypes) => {
     const UserStats = sequelize.define('UserStats', {
+        user_stat_id: {
+            type: DataTypes.BIGINT,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         user_id: {
             type: DataTypes.BIGINT,
-            primaryKey: true
+            allowNull: false,
+            unique: true,
+            references: { model: 'users', key: 'user_id' },
+            onDelete: 'CASCADE',
         },
         total_xp: {
             type: DataTypes.INTEGER,

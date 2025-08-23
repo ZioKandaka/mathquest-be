@@ -6,10 +6,10 @@ export default (sequelize, DataTypes) => {
             autoIncrement: true
         },
         display_name: {
-            type: DataTypes.TEXT
+            type: DataTypes.STRING(255)
         },
         email: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(255),
             unique: true
         },
         created_by: {

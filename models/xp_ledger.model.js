@@ -10,7 +10,7 @@ export default (sequelize, DataTypes) => {
             allowNull: false
         },
         source_type: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(50),
             allowNull: false
         },
         source_id: {

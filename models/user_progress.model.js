@@ -1,5 +1,10 @@
 export default (sequelize, DataTypes) => {
     const UserProgress = sequelize.define('UserProgress', {
+        user_progress_id: {
+            type: DataTypes.BIGINT,
+            primaryKey: true,
+            autoIncrement: true
+        },
         user_id: {
             type: DataTypes.BIGINT,
             allowNull: false

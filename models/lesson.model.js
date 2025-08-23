@@ -6,7 +6,7 @@ export default (sequelize, DataTypes) => {
             autoIncrement: true
         },
         title: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(255),
             allowNull: false
         },
         description: {
