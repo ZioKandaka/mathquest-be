@@ -79,7 +79,6 @@ export async function submitLesson(req, res, next) {
 
     try {
         const lesson_id = Number(req.params.lesson_id);
-        // const { user_id, attempt_id, answers } = req.body;
 
         const { user_id, attempt_id, answers } = await validateSubmitPayload(req.body)
 
