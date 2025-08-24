@@ -23,7 +23,7 @@ export async function getProfile(req, res, next) {
 
         res.status(200).json(data);
     } catch (err) {
-        console.log(`[getProfile] Error: ${error.name}`);
+        console.log(`[getProfile] Error: ${err.name}`);
         next(err);
     }
 }

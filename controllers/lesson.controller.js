@@ -159,7 +159,7 @@ export async function submitLesson(req, res, next) {
 
         let correct_count = 0;
         let earned_xp = 0;
-        let existing_correct_answer = await queryExistingCorrectAnswerOfLesson(lesson_id, transaction)
+        let existing_correct_answer = await queryExistingCorrectAnswerOfLesson(lesson_id, user_id, transaction)
 
         const detailed = normalized.map(a => {
             const problem = problemsById.get(a.problem_id);

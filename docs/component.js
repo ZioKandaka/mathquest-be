@@ -31,3 +31,27 @@
  *         best_streak: { type: integer, example: 7 }
  *         progress_percentage: { type: number, format: float, example: 62.5 }
  */
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required: [user_id, display_name, email]
+ *       properties:
+ *         user_id: { type: string, example: "1" }
+ *         display_name: { type: string, example: "Student" }
+ *         email: { type: string, format: email, example: "student@mathquest.com" }
+ *
+ *     UsersResponse:
+ *       type: array
+ *       items:
+ *         $ref: '#/components/schemas/User'
+ *
+ *     Error:
+ *       type: object
+ *       properties:
+ *         message: { type: string, example: "Internal server error" }
+ */
+

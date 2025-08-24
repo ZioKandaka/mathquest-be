@@ -52,10 +52,11 @@ export async function prepareSubmissionResult(user_id, lesson_id, created_by, ea
     };
 }
 
-export async function queryExistingCorrectAnswerOfLesson(lesson_id, transaction) {
+export async function queryExistingCorrectAnswerOfLesson(lesson_id, user_id, transaction) {
     let subs = await db.Submission.findAll({
         where: {
-            lesson_id: lesson_id
+            lesson_id: lesson_id,
+            user_id
         },
         attributes: ["submission_id", "lesson_id"],
         include: [
@@ -77,6 +78,6 @@ export async function queryExistingCorrectAnswerOfLesson(lesson_id, transaction)
             existing_answers.set(Number(ans.problem_id), value)
         })
     })
-    
+
     return existing_answers
 }
