@@ -21,13 +21,13 @@ A server for web application where user, mostly student, can learn about mathema
 
 # Available terminal scripts
 
-"npm run dev": run server
-"npm run db:init": Initialize the database creation which includes create database, run migration, and seeding database
-"npm run db:reset": undo all seeding and migration, then redo migration and seeding
-"npm run db:migrate": do migration
-"npm run db:migrate:undo": undo last migration
-"npm run db:migrate:undo:all": undo all migration
-"npm run db:seed": do seeding
+- "npm run dev": run server
+- "npm run db:init": Initialize the database creation which includes create database, run migration, and seeding database
+- "npm run db:reset": undo all seeding and migration, then redo migration and seeding
+- "npm run db:migrate": do migration
+- "npm run db:migrate:undo": undo last migration
+- "npm run db:migrate:undo:all": undo all migration
+- "npm run db:seed": do seeding
 
 # Troubleshoot
 
