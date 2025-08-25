@@ -13,6 +13,7 @@ A server for web application where user, mostly student, can learn about mathema
 
 - Clone this repository to your machine
 - Open terminal (bash) in root folder
+- Use or switch to NodeJS version 22.12.0 (recommended)
 - Run "npm i" on terminal
 - Open .env file, located in root folder. Set the connection parameter for the database. Also set the value of client domain (FRONTEND_ORIGIN), this is necessary to bypass CORS validation
 - Run "npm run db:init" on terminal. This will create database, run migration, and seeding
